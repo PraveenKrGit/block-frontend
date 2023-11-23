@@ -13,9 +13,9 @@ function App() {
         console.log(ipAddress);
       })
       .catch(error => {
-        console.error('Error fetching IP address:', error);
+        console.error('Error fetsadfsching IP address:', error);
       });
-  }, []);
+  }, [ipAddress]);
 
   return (
     <div>
