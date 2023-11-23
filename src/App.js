@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
+  const [ipAddress, setIpAddress] = useState(null);
+
+  useEffect(() => {
+    // Fetch the user's IP address when the component mounts
+    // axios.post('http://localhost:4000/record-ip')
+    axios.post('https://fusion-chain.onrender.com/record-ip')
+      .then(response => {
+        setIpAddress(response.data.ipAddress);
+        console.log(ipAddress);
+      })
+      .catch(error => {
+        console.error('Error fetching IP address:', error);
+      });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Users IP Address:</h1>
+      {ipAddress ? <p>{ipAddress}</p> : <p>Loading...</p>}
     </div>
   );
 }
